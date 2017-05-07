@@ -2,7 +2,16 @@ language: python
 python:
   - 3.5
 
+env:
+  global:
+    - validationToken=dummy-validation-token
+    - pageAccessToken=dummy-page-access-token
+
+services:
+  - mongodb
+
 # command to run tests
 script: python3 tests.py
+
 notifications:
   email: false
