@@ -1,18 +1,17 @@
 import time
+
 import messengerClient
 import sendEmailToLibrarian
 
-'''
-A class that deals with the messages we receive from users
-'''
-class ConversationHandler():
-    '''
-    create a new conversation handler with a given database client
-    '''
+
+class ConversationHandler(object):
+    """A class that deals with the messages we receive from users."""
+
     def __init__(self, database_client):
+        """Create a new conversation handler with a given database client."""
         self.database_client = database_client
         self.checkout_words = ['check', 'checking', 'checked', 'check out', 'checkout', 'checking out', 'take', 'took', 'taking', 'grabbing', 'grab', 'grabbed', 'checked out', 'borrow', 'borrowed', 'want']
-        self.return_words = ['return', 'returned','returning','brought', 'bring', 'bringing', 'dropping', 'dropped', 'took back', 'left', 'done', 'done with', 'finished']
+        self.return_words = ['return', 'returned', 'returning', 'brought', 'bring', 'bringing', 'dropping', 'dropped', 'took back', 'left', 'done', 'done with', 'finished']
         self.closing_words = ['thanks', 'thank', 'ok', 'bye', 'goodbye', 'good-bye', 'okay', 'cancel', 'stop', 'fuck', 'yay']
         self.available_words = ['available', 'there']
         self.help_words = ['how do i', 'help', 'manual', 'documentation', 'how to', 'trouble', 'confused', 'what do i do with', 'what should i do', "i don't know"]
@@ -35,7 +34,7 @@ class ConversationHandler():
     def find_tools_in_message(self, message):
         found_tools = []
         tools_list = self.database_client.get_all_tools()
-        #loop through list looking for tool names in message
+        # loop through list looking for tool names in message
         for tool in tools_list:
             if tool['name'] in message:
                 found_tools.append(tool)
@@ -52,7 +51,7 @@ class ConversationHandler():
         tool_string = ''
         print('temp_tools', tool_list)
         for tool in tool_list:
-            tool_string = tool_string + tool['name'] + " and " # allow for a list of tools
+            tool_string = tool_string + tool['name'] + " and "  # allow for a list of tools
         # remove final and from string
         tool_string = tool_string[:-5]
         print('tool string:', tool_string)
@@ -67,17 +66,17 @@ class ConversationHandler():
     '''
     def parse_due_date(self, message):
         due_date = 0
-        SECONDS_IN_DAY = 3600*24
+        SECONDS_IN_DAY = 3600 * 24
 
         # they want a 24 hour loan
         if message == 'yes':
-            due_date = int(time.time()) + 120 # !!!!!! CHANGE THIS BACK TO SECONDS_IN_DAY!!!!!!
+            due_date = int(time.time()) + 120  # FIXME !!!!!! CHANGE THIS BACK TO SECONDS_IN_DAY!!!!!!
         # they want a 12 hour loan
         elif message == '12 hours instead':
-            due_date = int(time.time()) + (SECONDS_IN_DAY/2)
-        #they want a 3 day loan
+            due_date = int(time.time()) + (SECONDS_IN_DAY / 2)
+        # they want a 3 day loan
         elif message == '3 days instead':
-            due_date = int(time.time()) + (SECONDS_IN_DAY*3)
+            due_date = int(time.time()) + (SECONDS_IN_DAY * 3)
         return due_date
 
     '''
@@ -106,14 +105,14 @@ class ConversationHandler():
         if any(word in message for word in self.help_words):
             response = ''
             tool_help_wanted = self.find_tools_in_message(message)
-            if len(tool_help_wanted) >0:
+            if len(tool_help_wanted) > 0:
                 resource_links = ''
                 for tool in tool_help_wanted:
                     resource_links += ' ' + tool['resource_link']
-                response ="The Library gave me some resources that might be helpful, see if this is useful:" + resource_links
+                response = "The Library gave me some resources that might be helpful, see if this is useful:" + resource_links
             else:
-                response ="😵 I have no clue how to help you with this one! I've passed your question along to the librarians. Hopefully they know what to do and will contact you soon. 😅"
-                #TODO: send email to librarian here
+                response = "😵 I have no clue how to help you with this one! I've passed your question along to the librarians. Hopefully they know what to do and will contact you soon. 😅"
+                # TODO: send email to librarian here
             return user, response, None
 
         # this needs to be located above the NO_CONTACT check
@@ -126,7 +125,7 @@ class ConversationHandler():
                 response = "Check The Library's online database for the full tool list: https://olin.tind.io/"
                 return user, response, None
 
-        #if the user is initiating contact
+        # if the user is initiating contact
         if user['stage'] == self.NO_CONTACT:
 
             # trying to return
@@ -139,11 +138,11 @@ class ConversationHandler():
                 tools_wanted = self.find_tools_in_message(message)
                 response_string = ''
                 quickreply = None
-                if len(tools_wanted) >0:
+                if len(tools_wanted) > 0:
                     unavailable_tools = []
                     for tool in tools_wanted:
                         available_modifier = ''
-                        if tool['current_user'] != None:
+                        if tool['current_user'] is not None:
                             available_modifier = 'not '
                             unavailable_tools.append(tool)
                         response_string += 'the {} is {}available and '.format(tool['name'], available_modifier)
@@ -199,29 +198,29 @@ class ConversationHandler():
                 user['temp_tools'] = []
                 return user, "☺️ Alrighty. Is there something else I can help with?", None
 
-        #if the user wants to check out something
+        # if the user wants to check out something
         if user['stage'] == self.WANT_CHECKOUT or user['stage'] == self.SENT_GREETING:
             tools_wanted = self.find_tools_in_message(message)
             user['temp_tools'] = tools_wanted
 
-            #if we found a tool name/s in the message
+            # if we found a tool name/s in the message
             if len(tools_wanted) > 0:
                 tool_string = self.make_tool_string(user['temp_tools'])
                 print('tool string in line:', tool_string)
                 response = "Sounds like you want to check out a {}, is that correct?".format(tool_string)
                 user['stage'] = self.CONFIRM_TOOL
                 print(user['stage'])
-                return user, response, ['yes','no']
+                return user, response, ['yes', 'no']
 
-            #if we could not identify a tool name/s in the message
+            # if we could not identify a tool name/s in the message
             else:
                 user['stage'] = self.NO_CONTACT
                 print(user['stage'])
                 return user, "What can I do for ya?", None
 
-        #we check that we parsed the correct tool/s...
+        # we check that we parsed the correct tool/s...
         if user['stage'] == self.CONFIRM_TOOL:
-            #...if so, we find out how long the loan will be
+            # ...if so, we find out how long the loan will be
             if message == 'yes':
 
                 available = True
@@ -229,7 +228,7 @@ class ConversationHandler():
 
                 # check if those tools are in right now
                 for tool in user['temp_tools']:
-                    if tool['current_user'] != None:
+                    if tool['current_user'] is not None:
                         available = False
                         tools_out.append(tool)
 
@@ -245,14 +244,14 @@ class ConversationHandler():
                     print(user['stage'])
                     return user, response, None
 
-            #...if not, we try again
+            # ...if not, we try again
             else:
                 user['temp_tools'] = []
                 user['stage'] = self.NO_CONTACT
                 print(user['stage'])
                 return user, "😵 Sorry I misunderstood.  What do you want to do?", None
 
-        #update user and tool db based on the loan time
+        # update user and tool db based on the loan time
         if user['stage'] == self.HOW_LONG:
             tool_string = self.make_tool_string(user['temp_tools'])
             for tool in user['temp_tools']:
@@ -263,7 +262,7 @@ class ConversationHandler():
 
             # TODO: how to handle loan time if they are checking out more than one tool
 
-            #finish the interaction and reset the conversation stage
+            # finish the interaction and reset the conversation stage
             response = "😎 You're all set!  I'll remind you to return the {} before it's due.".format(tool_string)
             user['temp_tools'] = []
             user['stage'] = self.NO_CONTACT
@@ -271,12 +270,12 @@ class ConversationHandler():
             return user, response, None
 
         if user['stage'] == self.CONFIRM_TOOL_RETURN:
-            #...if so, we find out how long the loan will be
+            # ...if so, we find out how long the loan will be
             if message == 'yes':
                 tool_string = self.make_tool_string(user['temp_tools'])
 
                 # TODO: tell them if they're trying to return something they don't have
-                #update tool
+                # update tool
                 for tool in user['temp_tools']:
                     if tool['current_user'] == user['_id']:
                         tool['current_user'] = None
@@ -293,7 +292,7 @@ class ConversationHandler():
                 print(user['stage'])
                 return user, "✨🏆✨ Thanks!!!!  I'll let The Library know the {} has returned.".format(tool_string), None
 
-            #...if not, we try again
+            # ...if not, we try again
             else:
                 user['temp_tools'] = []
                 user['stage'] = self.WANT_RETURN
@@ -304,16 +303,16 @@ class ConversationHandler():
             tools_returning = self.find_tools_in_message(message)
             user['temp_tools'] = tools_returning
 
-            #if we found a tool name/s in the message
+            # if we found a tool name/s in the message
             if len(tools_returning) > 0:
                 tool_string = self.make_tool_string(user['temp_tools'])
                 print('tool string in line:', tool_string)
                 response = "You're returning a {}, is that right?".format(tool_string)
                 user['stage'] = self.CONFIRM_TOOL_RETURN
                 print(user['stage'])
-                return user, response, ['yes','no']
+                return user, response, ['yes', 'no']
 
-            #if we could not identify a tool name/s in the message
+            # if we could not identify a tool name/s in the message
             else:
                 user['stage'] = self.WANT_RETURN
                 print(user['stage'])
@@ -322,4 +321,4 @@ class ConversationHandler():
         print('I GOT TO THE END, OH NO')
         return user
 
-        ## TODO: check for cancelling
+        # TODO: check for cancelling

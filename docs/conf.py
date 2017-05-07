@@ -16,10 +16,13 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
+# isort:skip_file
+#
+
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
-from recommonmark.parser import CommonMarkParser
+from recommonmark.parser import CommonMarkParser  # noqa: E402
 
 source_parsers = {
     '.md': CommonMarkParser,
@@ -43,7 +46,7 @@ templates_path = ['_templates']
 # You can specify multiple suffix as a list of string:
 #
 source_suffix = ['.rst', '.md']
-#source_suffix = '.rst'
+# source_suffix = '.rst'
 
 # The master toctree document.
 master_doc = 'index'
@@ -155,6 +158,3 @@ texinfo_documents = [
      author, 'loanbot', 'One line description of project.',
      'Miscellaneous'),
 ]
-
-
-

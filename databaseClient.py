@@ -3,10 +3,9 @@ import os
 from pymongo import MongoClient
 
 
-'''
-the class sructure used for the User in the Mongo database
-'''
-class User:
+class User(object):
+    """The class sructure used for the User in the Mongo database."""
+
     def __init__(self, sender_id, name):
         self.sender_id = sender_id
         self.tools = []
@@ -14,82 +13,71 @@ class User:
         self.stage = 0
         self.name = name
 
-'''
-A client which connects to Mongo and deals with Mongo database operations
-'''
-class DatabaseClient():
-	def __init__(self):
-		MONGO_URI = os.environ['mongo_uri']
-		client = MongoClient(MONGO_URI)
-		db = client.olinloanbot
-		self.users = db.users
-		self.tools = db.tindtools
 
-	'''
-	returns all users in the Users database
-	'''
-	def get_all_users(self):
-		return self.users.find({})
+class DatabaseClient(object):
+    """A client which connects to Mongo and deals with Mongo database operations."""
 
-	'''
-	returns all tools in the Tools database
-	'''
-	def get_all_tools(self):
-		return self.tools.find({})
+    def __init__(self):
+        MONGO_URI = os.environ['mongo_uri']
+        client = MongoClient(MONGO_URI)
+        db = client.olinloanbot
+        self.users = db.users
+        self.tools = db.tindtools
 
-	'''
-	returns all non checked out tools in the Tools database
-	'''
-	def get_all_available_tools(self):
-		return self.tools.find({'current_user':None})
+    def get_all_users(self):
+        """Return all users in the Users database."""
+        return self.users.find({})
 
-	'''
-	finds a user from a given field, allowing to search by any field
-	'''
-	def find_user(self, field_name, field_value):
-		return self.users.find_one({field_name:field_value})
+    def get_all_tools(self):
+        """Return all tools in the Tools database."""
+        return self.tools.find({})
 
-	'''
-	finds one user by using the sender_id as the search field
-	'''
-	def find_user_by_sender_id(self, sender_id):
-		return self.users.find_one({'sender_id':sender_id})
+    def get_all_available_tools(self):
+        """Return all non checked out tools in the Tools database."""
+        return self.tools.find({'current_user': None})
 
-	'''
-	either finds a user by sender_id, or creates that user in the database
-	returns the user
-	'''
-	def find_or_create_user(self, sender_id, name):
-	    user = self.users.find_one({'sender_id':sender_id})
-	    if user == None:
-	        user = User(sender_id, name)
-	        self.users.insert_one(user.__dict__)
-	    user = self.users.find_one({'sender_id':sender_id})
-	    return user
+    def find_user(self, field_name, field_value):
+        """Find a user from a given field, allowing to search by any field."""
+        return self.users.find_one({field_name: field_value})
 
-	'''
-	given an updated user dictionary with the same sender_id,
-	replaces the old database entry with the new one
-	'''
-	def update_user(self, updated_user):
-		sender_id = updated_user['sender_id']
-		self.users.find_one_and_replace({"sender_id":sender_id}, updated_user)
+    def find_user_by_sender_id(self, sender_id):
+        """Find one user by using the sender_id as the search field."""
+        return self.users.find_one({'sender_id': sender_id})
 
-	'''
-	finds a tool by searching on the name field
-	'''
-	def find_tool_by_name(self, name):
-		return self.tools.find_one({'name':name})
+    def find_or_create_user(self, sender_id, name):
+        """Find or crate a user in the database.
 
-	'''
-	finds a tool by searching on the id field
-	'''
-	def find_tool_by_id(self, tool_id):
-		return self.tools.find_one({'_id':tool_id})
+        Either finds a user by sender_id, or creates that user in the database.
+        Returns the user.
+        """
+        user = self.users.find_one({'sender_id': sender_id})
+        if user is None:
+            user = User(sender_id, name)
+            self.users.insert_one(user.__dict__)
+        user = self.users.find_one({'sender_id': sender_id})
+        return user
 
-	'''
-	given an updated tool dictionary with the same _id,
-	replaces the old database entry with the new one
-	'''
-	def update_tool(self, updated_tool):
-		self.tools.find_one_and_replace({"_id":updated_tool['_id']}, updated_tool)
+    def update_user(self, updated_user):
+        """Update a user in the database.
+
+        Given an updated user dictionary with the same sender_id,
+        replaces the old database entry with the new one
+        """
+        sender_id = updated_user['sender_id']
+        self.users.find_one_and_replace({"sender_id": sender_id}, updated_user)
+
+    def find_tool_by_name(self, name):
+        """Find a tool by searching on the name field."""
+        return self.tools.find_one({'name': name})
+
+    def find_tool_by_id(self, tool_id):
+        """Find a tool by searching on the id field."""
+        return self.tools.find_one({'_id': tool_id})
+
+    def update_tool(self, updated_tool):
+        """Update a tool in the database.
+
+        Given an updated tool dictionary with the same _id,
+        replace the old database entry with the new one
+        """
+        self.tools.find_one_and_replace({"_id": updated_tool['_id']}, updated_tool)

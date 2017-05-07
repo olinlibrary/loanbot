@@ -6,13 +6,14 @@ import requests
 from pymongo import MongoClient
 
 MONGO_URI = os.environ['mongo_uri']
-#ACCESS_TOKEN = os.environ['tind_access_token']
+# ACCESS_TOKEN = os.environ['tind_access_token']
 
 client = MongoClient(MONGO_URI)
 db = client.olinloanbot
 tools = db.tindtools
 
-class Tool:
+
+class Tool(object):
     def __init__(self, name, collection, resource_link, olin_id, alternate_names, image_url):
         self.name = name
         self.current_user = None
@@ -23,8 +24,8 @@ class Tool:
         self.alternate_names = alternate_names
         self.image_url = image_url
 
-def parse_xml():
 
+def parse_xml():
     r = requests.get("https://olin.tind.io/search?ln=en&p=&f=&c=Tools&c=Media+Equipment&of=xm")
 
     root = ET.fromstring(r.text)
@@ -68,10 +69,12 @@ def parse_xml():
             new_tool = Tool(name, collection, resource_link, olin_id, alternate_names, image_url)
             tools.insert_one(new_tool.__dict__)
 
+
 def create_tools(tools_list):
     for tool in tools_list:
         tools.insert_one(tool.__dict__)
 
+
 parse_xml()
 
-#create_tools(tools_list)
+# create_tools(tools_list)

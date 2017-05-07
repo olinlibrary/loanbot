@@ -10,29 +10,27 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 # from apscheduler.schedulers.blocking import BlockingScheduler
 
-
-
 app = Flask(__name__)
 
 VALIDATION_TOKEN = os.environ['validationToken']
 
 
-REMINDER_TIME = 90 # should be 2 hours
-INTERVAL_TIME = 100# should be 1 hour
+REMINDER_TIME = 90   # should be 2 hours
+INTERVAL_TIME = 100  # should be 1 hour
 
 messenger_client = messengerClient.MessengerClient()
 database_client = databaseClient.DatabaseClient()
 conversation_handler = conversationHandler.ConversationHandler(database_client)
 
+
 @app.route('/')
 def home():
     return 'ok'
 
+
 @app.route('/webhook', methods=['GET'])
 def verify():
-    '''
-    Facebook (FB) validating that we are in control of the app.
-    '''
+    """Facebook (FB) requests this to validate that we are in control of the app."""
     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
         if not request.args.get("hub.verify_token") == VALIDATION_TOKEN:
             return "Verification token mismatch", 403
@@ -40,13 +38,15 @@ def verify():
 
     return "Hello world", 200
 
+
 @app.route('/webhook', methods=['POST'])
 def posthook():
-    '''
-    Runs when we receive a message from FB, includes the FB message
-    data and metadata. The entry point to our other functions.
-    '''
-    #handles the request and gets us into the current message
+    """Hand a FB message.
+
+    This is requested when we receive a message from FB. It includes the FB message data and metadata.
+    This is the entry point to our other functions.
+    """
+    # handles the request and gets us into the current message
     data = request.get_json()
 
     print('posthook')
@@ -65,12 +65,15 @@ def posthook():
 
     return "ok", 200
 
+
 # @sched.scheduled_job('interval', seconds=INTERVAL_TIME)
 def check_if_due_and_remind():
-    '''
-    loops through the tools to determine whether they are due
-    in the next two hours, and sends the reminder to the user. uses import time
-    '''
+    """Remind users of tools that will soon be due.
+
+    Loop through the tools to determine whether they are due
+    in the next two hours, and sends the reminder to the user.
+    This uses the import time.
+    """
     print('beginning check_if_due_and_remind')
 
     current_time = int(time.time())
@@ -79,14 +82,14 @@ def check_if_due_and_remind():
         print('next tool')
         if tool['current_due_date']:
             print('tool had due date')
-            if int(tool['current_due_date'])-current_time<=(REMINDER_TIME):
-                #emoji in reminder_message is an alarm clock
+            if int(tool['current_due_date']) - current_time <= REMINDER_TIME:
+                # emoji in reminder_message is an alarm clock
                 reminder_message = '⏰ Hi! The {} is due very soon, could you bring it back to the library please?'.format(tool['name'])
-                user_to_remind = database_client.find_user('_id',tool['current_user'])
+                user_to_remind = database_client.find_user('_id', tool['current_user'])
                 messenger_client.send_message(user_to_remind['sender_id'], reminder_message, None)
                 print('sent reminder message for {}'.format(tool['_id']))
 
-#TODO: let them say they have returned it, so it stops reminding them
+# TODO: let them say they have returned it, so it stops reminding them
 
 
 # def timed_job():
