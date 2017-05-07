@@ -220,12 +220,12 @@ The structure of the return block is very specific; it returns a 3-part tuple:
 
 ## Operator
 
-If you are an Olin user working on the project for Olin, you can contact Anne LoVerso or Mimi Kome to get the app secrets, which are required for changing the heroku deployment.
+If you are an Olin user working on the project for Olin, you can contact Anne LoVerso or Mimi Kome to get the app secrets, which are required for changing the Heroku deployment.
 
 If you are outside Olin looking to adapt the project, you will need to create your own Facebook app and secrets.
 [Creating a Facebook app is well documented](https://developers.facebook.com/docs/messenger-platform/guides/quick-start)
 
-The app workflow uses git and Heroku.  The Heroku account is dependent on our Mongo database, which is hosted on [mLab](https://mlab.com).  Again, contact Anne or Mimi for login credentials.  We also have a webhook that connects us to [travis CI](https://travis-ci.org/olinlibrary/loanbot) but we have not been tending to that so it’s not passing at the moment.
+The deployment workflow uses Heroku. The Heroku account is dependent on our Mongo database. To replace this or use your own, initialize a new database via `python3 create_tools_from_tind.py`.
 
 The app needs access to the following environment variables:
 
