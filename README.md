@@ -1,6 +1,6 @@
 # Loan Wrangler Chatbot
 
-[![Build Status](https://travis-ci.org/aloverso/loanbot.svg?branch=master)](https://travis-ci.org/aloverso/loanbot)
+[![Build Status](https://travis-ci.org/olinlibrary/loanbot.svg?branch=master)](https://travis-ci.org/olinlibrary/loanbot)
 
 Loan Wrangler is a friendly chatbot, ready to help you with (almost) anything involving borrowing and using the library’s awesome tools and media equipment.
 
