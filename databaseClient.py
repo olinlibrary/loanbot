@@ -18,7 +18,8 @@ class DatabaseClient(object):
     """A client which connects to Mongo and deals with Mongo database operations."""
 
     def __init__(self):
-        MONGO_URI = os.environ['mongo_uri']
+        # TODO DRY w/ other references to os.environ.get('mongo_uri')
+        MONGO_URI = os.environ.get('mongo_uri', 'mongodb://localhost:27017/')
         client = MongoClient(MONGO_URI)
         db = client.olinloanbot
         self.users = db.users
