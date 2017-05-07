@@ -1,13 +1,16 @@
 import os
-from flask import Flask, redirect, render_template, request, url_for, Response
-from apscheduler.schedulers.background import BackgroundScheduler
-# from apscheduler.schedulers.blocking import BlockingScheduler
-
 import time
 
-import messengerClient
+from flask import Flask, Response, redirect, render_template, request, url_for
+
 import conversationHandler
 import databaseClient
+import messengerClient
+from apscheduler.schedulers.background import BackgroundScheduler
+
+# from apscheduler.schedulers.blocking import BlockingScheduler
+
+
 
 app = Flask(__name__)
 

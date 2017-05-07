@@ -1,4 +1,5 @@
 import os
+
 from pymongo import MongoClient
 
 MONGO_URI = os.environ['mongo_uri']
@@ -15,10 +16,10 @@ class Tool:
         self.collection = collection
         self.resource_link = resource_link
 
-tools_list = [Tool('screwdriver', 'tool wall', None), 
-Tool('drill', 'tool wall', None), 
-Tool('arduino', 'tool wall', 'https://www.arduino.cc/en/Main/Docs'), 
-Tool('camera','media', 'https://vimeo.com/201067762'), 
+tools_list = [Tool('screwdriver', 'tool wall', None),
+Tool('drill', 'tool wall', None),
+Tool('arduino', 'tool wall', 'https://www.arduino.cc/en/Main/Docs'),
+Tool('camera','media', 'https://vimeo.com/201067762'),
 Tool('tripod', 'media', 'https://vimeo.com/201067762'),
 Tool('lens', 'media', 'https://vimeo.com/201067762')]
 

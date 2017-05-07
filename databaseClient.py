@@ -1,5 +1,7 @@
-from pymongo import MongoClient
 import os
+
+from pymongo import MongoClient
+
 
 '''
 the class sructure used for the User in the Mongo database

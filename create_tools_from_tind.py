@@ -1,7 +1,9 @@
 import os
-from pymongo import MongoClient
-import requests
 import xml.etree.ElementTree as ET
+
+import requests
+
+from pymongo import MongoClient
 
 MONGO_URI = os.environ['mongo_uri']
 #ACCESS_TOKEN = os.environ['tind_access_token']

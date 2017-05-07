@@ -1,10 +1,11 @@
 #!flask/bin/python
 import unittest
 
-from server import app
 import conversationHandler
 import fakeDatabaseClient
 import messengerClient
+from server import app
+
 # messenger_client = messengerClient.MessengerClient()
 database_client = fakeDatabaseClient.fakeDatabaseClient()
 conversation_handler = conversationHandler.ConversationHandler(database_client)

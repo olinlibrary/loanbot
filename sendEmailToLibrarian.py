@@ -1,6 +1,6 @@
 #code copied then modified from http://naelshiab.com/tutorial-send-email-python/
-import smtplib
 import os
+import smtplib
 
 
 def send_email_to_librarian(patron, question):
