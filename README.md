@@ -87,7 +87,7 @@ Our code has the following app secrets:
 - `mongo_uri` is a [MongoDB connection string URI](https://docs.mongodb.com/manual/reference/connection-string/). This defaults to a local instance.
 - `tind_access_token` will be needed to make Tind API requests.  Currently not used.
 
-When you install the code, run `sudo pip install requirements.txt` to install the required packages.  If you want to update the documentation, you will also need to run `sudo pip install requirements-dev.txt`.  Also, this project is written in Python 3, so if you’re not using a virtual environment, you should run those commands instead with `pip3`.
+When you install the code, run `pip install -r requirements.txt` to install the required packages.  If you want to update the documentation, you will also need to run `pip install -r requirements-dev.txt`.  Also, this project is written in Python 3, so if you’re not using a virtual environment, you should run those commands instead with `sudo pip3`.
 
 Either install a local MongoDB instance, or provision a hosted instance and set `mongo_uri` to its URL.
 
