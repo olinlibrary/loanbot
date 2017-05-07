@@ -8,7 +8,7 @@ Loan Wrangler is a friendly chatbot, ready to help you with (almost) anything in
 
 Libraries are awesome because they want you to have what you want, when you want it, for free. This started with books, then digital resources, and now the possibilities are endless! For example, the Olin College library wants users to be able to borrow tools and media equipment. Since the current loan system wasn’t made for tools (which are different than books in a few key ways), we created a chatbot that can help library patrons check out, use, and return tools in a much more flexible, friendly, and fun way.
 
-![A list of reasons that loans of books, tools, and media equipment must be handled differently: 1 Different loan time. 2 Different loan frequency. 3 Different kind of help needed to use the item.](/LoanWranglerDemo.png "Why a loan chatbot?")
+![A list of reasons that loans of books, tools, and media equipment must be handled differently: 1 Different loan time. 2 Different loan frequency. 3 Different kind of help needed to use the item.](./docs/images/LoanWranglerDemo.png "Why a loan chatbot?")
 
 ## Conversing With Loan Wrangler
 
@@ -16,31 +16,31 @@ Since the bot is still under development and not yet public, you will need to ch
 
 When you message Loan Wrangler, it will do its best to meet all your tool and media equipment loan needs. Since it is still a young bot, you will notice it doesn't have answers for everything! Here is an example conversation you might have:
 
-![Screenshot from a demo conversation with the chatbot. The user and bot exchange a greeting, then the user asks if the drill is available. The bot replies that the drill is not available, and offers to ask the person who borrowed it to bring it back. The user confirms that they wan this, and the bot says it has let the drill borrower know.](/greetingAndAvailability.png "Demo Conversation")
+![Screenshot from a demo conversation with the chatbot. The user and bot exchange a greeting, then the user asks if the drill is available. The bot replies that the drill is not available, and offers to ask the person who borrowed it to bring it back. The user confirms that they wan this, and the bot says it has let the drill borrower know.](./docs/images/greetingAndAvailability.png "Demo Conversation")
 
 At this point the bot would send a message to the user with the drill checked out, like "someone's looking for the drill, could you return it if you're done using it?" Once the drill is returned, the next user can check it out:
 
-![Screenshot from a demo conversation with the chatbot. The user says they want the drill, and the bot confirms the item, then asks whether a loan time of 1 day is okay or whether 12 hours or 3 days would be better. The user chooses 1 day, and the bot says they're all set, it will remind them to return the drill before it is due.](/checkOutDrill.png "Demo Conversation")
+![Screenshot from a demo conversation with the chatbot. The user says they want the drill, and the bot confirms the item, then asks whether a loan time of 1 day is okay or whether 12 hours or 3 days would be better. The user chooses 1 day, and the bot says they're all set, it will remind them to return the drill before it is due.](./docs/images/checkOutDrill.png "Demo Conversation")
 
 Shortly before the drill is due, the bot will send a reminder, and keep sending periodic reminders until the drill is returned.
 
-![Screenshot from a demo conversation with the chatbot. The bot lets the user know that the drill is due soon, and asks them to bring it back to the library.](/returnPlease.png "Demo Conversation")
+![Screenshot from a demo conversation with the chatbot. The bot lets the user know that the drill is due soon, and asks them to bring it back to the library.](./docs/images/returnPlease.png "Demo Conversation")
 
 When the user returns the drill, they can let the bot know it's back:
 
-![Screenshot from a demo conversation with the chatbot. The user says they returned the drill, and the bot confirms the tool, then thanks the user and says it will let The Library know the drill has returned.](/returnDrill.png "Demo Conversation")
+![Screenshot from a demo conversation with the chatbot. The user says they returned the drill, and the bot confirms the tool, then thanks the user and says it will let The Library know the drill has returned.](./docs/images/returnDrill.png "Demo Conversation")
 
 A user can also check out more than one tool at a time, and ask for help with tools:
 
-![Screenshot from a demo conversation with the chatbot. In one message the user asks for three different tools. As before, teh bot confirms the three tools, offers loan times, and lets the user know that it will remind them to return the tools. The user then asks how to use a soldering iron. The bot offers a link to a youtube video.](/checkOutMultipleTools.png "Demo Conversation")
+![Screenshot from a demo conversation with the chatbot. In one message the user asks for three different tools. As before, teh bot confirms the three tools, offers loan times, and lets the user know that it will remind them to return the tools. The user then asks how to use a soldering iron. The bot offers a link to a youtube video.](./docs/images/checkOutMultipleTools.png "Demo Conversation")
 
 Likewise, a user can return more than one tool at a time:
 
-![Screenshot from a demo conversation with the chatbot. In one message the user says they have returned two tools, the sewing machine and the gimbal. The bot confirms the tools and thanks the user.](/returnTwoTools.png "Demo Conversation")
+![Screenshot from a demo conversation with the chatbot. In one message the user says they have returned two tools, the sewing machine and the gimbal. The bot confirms the tools and thanks the user.](./docs/images/returnTwoTools.png "Demo Conversation")
 
 If a user asks for help that Loan Wrangler isn't equipped to give, it redirects their question to the librarians (note that this feature is only partially complete).
 
-![Screenshot from a demo conversation with the chatbot. The user asks what they should do with their life. The bot says it doesn't know how to help them and that it has passed their question on to the librarians, who will hopefully know what to do and will contact the user soon.](/helpwithmylife.png "Demo Conversation")
+![Screenshot from a demo conversation with the chatbot. The user asks what they should do with their life. The bot says it doesn't know how to help them and that it has passed their question on to the librarians, who will hopefully know what to do and will contact the user soon.](./docs/images/helpwithmylife.png "Demo Conversation")
 
 ## Product Manager
 
