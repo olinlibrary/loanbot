@@ -216,7 +216,7 @@ The structure of the return block is very specific; it returns a 3-part tuple:
 
 ## Operator
 
-The app workflow uses git and heroku.  The heroku is dependent on our Mongo database, which is hosted on mlabs.  Again, contact Anne or Mimi for login credentials.  We also have a webhook that connects us to [travis CI](https://travis-ci.org/aloverso/loanbot) but we have not been tending to that so it’s not passing at the moment.
+The app workflow uses git and Heroku.  The Heroku account is dependent on our Mongo database, which is hosted on [mLab](https://mlab.com).  Again, contact Anne or Mimi for login credentials.  We also have a webhook that connects us to [travis CI](https://travis-ci.org/olinlibrary/loanbot) but we have not been tending to that so it’s not passing at the moment.
 
 Loan Wrangler also relies on our Facebook page and its Messenger integration, which can be managed from the Facebook developers dashboard.  Both the Library Facebook account Lib Guru and Anne are admins of this page and can make changes.
 The Facebook page is not yet approved for public messaging, which means that in order for the bot to respond to a given user, they need to be listed as a Developer, Tester, or Administrator role on the Facebook developer app site.  When the app is public, this won’t be necessary.  To make it public just submit an application for review on the Developer dashboard after making sure you’ve followed Facebook’s checkboxes, such as uploading a photo.
