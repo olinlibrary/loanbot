@@ -104,8 +104,8 @@ Our code contains four primary files:
 
 We also have some additional files:
 
-- `create_tools.py` creates fake tools in the mongo database.  This is currently obsolete.
-- `create_tools_from_tind.py` creates our tools database by pulling an XML from Tind and parsing it.  This is a separate script from our app, so it only executes when it is explicitly run.  Future work could including making this update live.
+- `create_dummy_tools.py` populates the database with a dummy set tools of tools, for testing.  This is currently obsolete.
+- `create_tools_from_tind.py` populates the tools database by pulling an XML from Tind and parsing it.  This is a separate script from our app, so it only executes when it is explicitly run.  Future work could including making this update live.
 - `sendEmailToLibrarian.py` is imported and used to send an email when needed.
 - `tests.py` contains our tests.  The test coverage is low and non-ideal.
 - `fakeDatabaseClient.py` creates a fake database client that returns fake data, to be used in the tests.

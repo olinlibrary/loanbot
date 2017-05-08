@@ -1,3 +1,8 @@
+"""Populate the database with tools from a literal in this file.
+
+This is file is not currently used. To restore it, see the FIXMEs and TODOs in this file.
+"""
+
 import os
 
 from pymongo import MongoClient
@@ -6,10 +11,14 @@ from pymongo import MongoClient
 MONGO_URI = os.environ.get('mongo_uri', 'mongodb://localhost:27017/')
 
 client = MongoClient(MONGO_URI)
+# FIXME the database name below disagrees with the database in create_tools_from_tind
+# TODO if the database is aligned, this code might should verify that it's not run against production
+print("The database that this script creates isn't the one that the code uses.")
 db = client.olinloanbot
 tools = db.tools
 
 
+# TODO DRY w/ class in create_tools_from_tind
 class Tool(object):
     def __init__(self, name, collection, resource_link):
         self.name = name
