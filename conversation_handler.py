@@ -84,14 +84,20 @@ class ConversationHandler(object):
 
         Takes the message text string and a user (in dictionary format).
 
-        updated_user is the user dictionary, possibly changed or updated_user
-        response_text is the bot's response message
-        quickreply is a field indicating whether this should be a quickreply response
+        Parameters
+        ----------
+        updated_user
+            The user dictionary, possibly changed or updated_user
+        response_text : string
+            The bot's response message
+        quickreply : list
+            A field indicating whether this should be a quickreply response
             it either has the None value (not a quickreply message)
             or a list of quickreply options
 
-        returns a tuple:
-        updated_user, response_text, quickreply
+        Returns
+        -------
+            (updated_user, response_text, quickreply)
         """
         print('determine_response_for_user')
 

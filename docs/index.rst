@@ -15,9 +15,6 @@ Welcome to loanbot's documentation!
    database_client
    conversation_handler
 
-.. automodule:: server
-   :members:
-
 Indices and tables
 ==================
 
