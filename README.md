@@ -58,17 +58,9 @@ Currently, the bot can:
 
 We’ve been tracking bugs and new feature ideas on the GitHub issues page.
 
-### License
-
-MIT License
-
 #### Known bugs
 
 The return reminders are currently done using a threaded interval timer.  There’s a current bug where the messages are sent twice instead of once, usually one second apart.  We spent a lot of time looking at it and have been unable to figure out why.
-
-#### Credits and acknowledgement
-
-Code written by [Anne LoVerso](http://anneloverso.com) and Mimi Kome.  Help from Oliver Steele, Jeff Goldenson, and Emily Ferrier.  Thanks to the rest of the Hacking the Library class.
 
 ## Developer
 
@@ -237,3 +229,11 @@ The app needs access to the following environment variables:
 
 Loan Wrangler also relies on our Facebook page and its Messenger integration, which can be managed from the Facebook developers dashboard.  Both the Library Facebook account Lib Guru and Anne are admins of this page and can make changes.
 The Facebook page is not yet approved for public messaging, which means that in order for the bot to respond to a given user, they need to be listed as a Developer, Tester, or Administrator role on the Facebook developer app site.  When the app is public, this won’t be necessary.  To make it public just submit an application for review on the Developer dashboard after making sure you’ve followed Facebook’s checkboxes, such as uploading a photo.
+
+# Attribution
+
+Code written by [Anne LoVerso](http://anneloverso.com) and Mimi Kome.  Help from Oliver Steele, Jeff Goldenson, and Emily Ferrier.  Thanks to the rest of the Hacking the Library class.
+
+# License
+
+MIT License
