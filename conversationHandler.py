@@ -27,11 +27,12 @@ class ConversationHandler(object):
         self.AVAILABILITY_QUESTION = 9
         self.SEND_LIST = 10
 
-    '''
-    searches through a message looking for names of tools from the tools database
-    returns a list of tool names found, empty if none found
-    '''
     def find_tools_in_message(self, message):
+        """Find the tools in a message.
+
+        Search through a message looking for names of tools from the tools database.
+        Return a list of tool names found, empty if none found.
+        """
         found_tools = []
         tools_list = self.database_client.get_all_tools()
         # loop through list looking for tool names in message
@@ -44,10 +45,8 @@ class ConversationHandler(object):
                         found_tools.append(tool)
         return found_tools
 
-    '''
-    creates a string of all tools a user is attempting to check out
-    '''
     def make_tool_string(self, tool_list):
+        """Create a string of all tools a user is attempting to check out."""
         tool_string = ''
         print('temp_tools', tool_list)
         for tool in tool_list:
@@ -57,14 +56,15 @@ class ConversationHandler(object):
         print('tool string:', tool_string)
         return tool_string
 
-    '''
-    Parses the loan time quick reply message to store a due_date
-    for the tool/s the user wants to check out. uses import time
-    TODO: handle the case when we somehow get a different message
-    than the quick reply options were expecting in a way other than
-    making the due date "0"
-    '''
     def parse_due_date(self, message):
+        """Find the due date in a loan time quick reply message.
+
+        Parses the message to store a due_date
+        for the tool/s the user wants to check out. uses import time
+        """
+        # TODO: handle the case when we somehow get a different message
+        # than the quick reply options were expecting in a way other than
+        # making the due date "0"
         due_date = 0
         SECONDS_IN_DAY = 3600 * 24
 
@@ -79,21 +79,20 @@ class ConversationHandler(object):
             due_date = int(time.time()) + (SECONDS_IN_DAY * 3)
         return due_date
 
-    '''
-    Uses the user's stage to parse the message and determine how to reply
-
-    takes the message text string and a user (in dictionary format)
-
-    returns a tuple:
-    updated_user, response_text, quickreply
-
-    updated_user is the user dictionary, possibly changed or updated_user
-    response_text is the bot's response message
-    quickreply is a field indicating whether this should be a quickreply response
-        it either has the None value (not a quickreply message)
-        or a list of quickreply options
-    '''
     def determine_response_for_user(self, message, user):
+        """Use the user's stage to parse the message and determine how to reply.
+
+        Takes the message text string and a user (in dictionary format).
+
+        updated_user is the user dictionary, possibly changed or updated_user
+        response_text is the bot's response message
+        quickreply is a field indicating whether this should be a quickreply response
+            it either has the None value (not a quickreply message)
+            or a list of quickreply options
+
+        returns a tuple:
+        updated_user, response_text, quickreply
+        """
         print('determine_response_for_user')
 
         if any(word in message for word in self.closing_words):
