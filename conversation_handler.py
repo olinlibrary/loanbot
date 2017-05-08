@@ -1,7 +1,7 @@
 import time
 
-import messenger_client
 import send_email_to_librarian
+from messenger_client import MessengerClient
 
 
 class ConversationHandler(object):
@@ -189,7 +189,7 @@ class ConversationHandler(object):
                     # this is not the best code structure
                     # because we have this weird situation where the user we want to send a message to
                     # is not the user who sent us a message
-                    messenger_client = messenger_client.MessengerClient()
+                    messenger_client = MessengerClient()
                     reminder = "Hey, someone's interested in borrowing the {} that you have checked out. If you're done with it, could you bring it back?".format(tool['name'])
                     messenger_client.send_message(borrower_sender_id, reminder, None)
                 user['stage'] = self.NO_CONTACT
