@@ -35,7 +35,7 @@ class ConversationHandler(object):
         """
         found_tools = []
         tools_list = self.database_client.get_all_tools()
-        # loop through list looking for tool names in message
+        # find tools with a name or alternate_names in the message
         for tool in tools_list:
             if tool['name'] in message:
                 found_tools.append(tool)

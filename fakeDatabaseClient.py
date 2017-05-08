@@ -7,6 +7,7 @@ tools_list = [{
         "$oid": "58ebabe3638acc000b2e2429"
     },
     "name": "screwdriver",
+    "alternate_names": [],
     "current_due_date": 1492100080
 }, {
     "_id": {
@@ -14,6 +15,7 @@ tools_list = [{
     },
     "current_due_date": 1491424505,
     "name": "drill",
+    "alternate_names": [],
     "current_user": {
         "$oid": "58dfe761db78bb000bf7c88b"
     }
@@ -22,6 +24,7 @@ tools_list = [{
         "$oid": "58e5528dbf24551abe306611"
     },
     "name": "arduino",
+    "alternate_names": [],
     "current_due_date": None,
     "current_user": None
 }]

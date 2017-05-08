@@ -31,18 +31,16 @@ class TestCase(unittest.TestCase):
                 "current_user": {
                     "$oid": "58ebabe3638acc000b2e2429"
                 },
-                "name":
-                "screwdriver",
-                "current_due_date":
-                1492100080
+                "name": "screwdriver",
+                "alternate_names": [],
+                "current_due_date": 1492100080
             }, {
                 "_id": {
                     "$oid": "58e5528dbf24551abe306610"
                 },
-                "current_due_date":
-                1491424505,
-                "name":
-                "drill",
+                "current_due_date": 1491424505,
+                "name": "drill",
+                "alternate_names": [],
                 "current_user": {
                     "$oid": "58dfe761db78bb000bf7c88b"
                 }
