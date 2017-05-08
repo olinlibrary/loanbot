@@ -1,12 +1,12 @@
 import os
 import time
 
+from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask, Response, redirect, render_template, request, url_for
 
-import conversationHandler
-import databaseClient
-import messengerClient
-from apscheduler.schedulers.background import BackgroundScheduler
+import conversation_handler
+import database_client
+from messenger_client import MessengerClient
 
 # from apscheduler.schedulers.blocking import BlockingScheduler
 
@@ -18,9 +18,9 @@ VALIDATION_TOKEN = os.environ['validationToken']
 REMINDER_TIME = 90   # should be 2 hours
 INTERVAL_TIME = 100  # should be 1 hour
 
-messenger_client = messengerClient.MessengerClient()
-database_client = databaseClient.DatabaseClient()
-conversation_handler = conversationHandler.ConversationHandler(database_client)
+messenger_client = MessengerClient()
+database_client = database_client.DatabaseClient()
+conversation_handler = conversation_handler.ConversationHandler(database_client)
 
 
 @app.route('/')

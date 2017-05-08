@@ -11,9 +11,9 @@ Welcome to loanbot's documentation!
 
    mission
    server
-   messengerClient
-   databaseClient
-   conversationHandler
+   messenger_client
+   database_client
+   conversation_handler
 
 .. automodule:: server
    :members:

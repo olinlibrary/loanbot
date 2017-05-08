@@ -90,17 +90,17 @@ Our code has the following app secrets:
 Our code contains four primary files:
 
 - `server.py` is the main application with the Flask routing structure.  It creates instances of the next three objects.
-- `messengerClient.py` defines a class for interfacing with the sending and receiving of Facebook messages.
-- `databaseClient.py` defines a class for interacting with the Mongo database, and includes functions that get and set the various information we care about.
-- `conversationHandler.py` is the primary program for parsing received message text and determining the appropriate response.  It takes a database client in its constructor since it needs to get tool and user information.
+- `messenger_client.py` defines a class for interfacing with the sending and receiving of Facebook messages.
+- `database_client.py` defines a class for interacting with the Mongo database, and includes functions that get and set the various information we care about.
+- `conversation_handler.py` is the primary program for parsing received message text and determining the appropriate response.  It takes a database client in its constructor since it needs to get tool and user information.
 
 We also have some additional files:
 
 - `create_dummy_tools.py` populates the database with a dummy set tools of tools, for testing.  This is currently obsolete.
 - `create_tools_from_tind.py` populates the tools database by pulling an XML from Tind and parsing it.  This is a separate script from our app, so it only executes when it is explicitly run.  Future work could including making this update live.
-- `sendEmailToLibrarian.py` is imported and used to send an email when needed.
+- `send_email_to_librarian.py` is imported and used to send an email when needed.
 - `tests.py` contains our tests.  The test coverage is low and non-ideal.
-- `fakeDatabaseClient.py` creates a fake database client that returns fake data, to be used in the tests.
+- `fake_database_client.py` creates a fake database client that returns fake data, to be used in the tests.
 
 ### Understanding Conversation Handling
 

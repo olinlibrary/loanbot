@@ -1,5 +1,5 @@
-conversationHandler.py
+conversation_handler.py
 ======================
 
-.. autoclass:: conversationHandler
+.. autoclass:: conversation_handler
    :members:
